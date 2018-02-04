@@ -1,9 +1,6 @@
 package edu.programming.yourmechanics.disjoint;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
 
 /**
  * Disjoint class holds the disjoint list and provides functionality to add or
@@ -138,7 +135,7 @@ public class DisjointSet {
 				list.get(index).start = Math.max(start, interval.end);
 			}
 
-			if (list.get(index).end == list.get(index).start) {
+			if (list.get(index).end.equals(list.get(index).start) ){
 
 				list.remove(index);
 
@@ -224,6 +221,4 @@ public class DisjointSet {
 		return s;
 	}
 	
-	
-
 }

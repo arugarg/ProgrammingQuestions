@@ -25,14 +25,14 @@ public class Interval implements Comparable<Interval>, Comparator<Interval> {
 	@Override
 	public int compareTo(Interval o2) {
 
-		return o2.start > this.start ? 1 : o2.start == this.start ? 0 : -1;
+		return o2.start > this.start ? 1 : o2.start.equals(this.start) ? 0 : -1;
 	}
 
 	@Override
 	public int compare(Interval o1, Interval o2) {
 		// TODO Auto-generated method stub
 
-		if (o1.start == o2.start && o1.end == o2.end)
+		if (o1.start.equals(o2.start) && o1.end.equals(o2.end))
 			return 1;
 
 		return 0;
@@ -43,7 +43,7 @@ public class Interval implements Comparable<Interval>, Comparator<Interval> {
 		boolean sameSame = false;
 
 		if (object != null && object instanceof Interval) {
-			sameSame = (this.start == ((Interval) object).start && this.end == ((Interval) object).end);
+			sameSame = (this.start.equals(((Interval) object).start) && this.end.equals(((Interval) object).end));
 		}
 
 		return sameSame;

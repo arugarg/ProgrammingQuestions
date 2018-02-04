@@ -2,7 +2,7 @@
 
 package edu.programming.yourmechanics.disjoint;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -30,7 +30,9 @@ class TestSample {
 		ArrayList<Interval> result = new ArrayList<Interval>();
 		result.add(new Interval(1,8));
 		
-		assertArrayEquals("test is not passed ",result.toArray(), list.toArray());
+		//assertTrue(list.equals(result));
+		
+		assertEquals("test is not passed ",result, list);
 		
 	}
 	
@@ -44,20 +46,21 @@ class TestSample {
 		disjoint.union("remove",2000,3000);
 		disjoint.union("add",60,80);
 		disjoint.union("remove",40,70);
-		disjoint.union("add",200,7000);
+		disjoint.union("add",20,7000);
 		
 		list = disjoint.getList();
 		
 		ArrayList<Interval> result = new ArrayList<Interval>();
-		result.add(0, new Interval(70,80));
-		result.add(1, new Interval(200,7000));
-		
-		
+		//result.add( new Interval(70,80));
+		result.add( new Interval(70,7000));
 		
 		System.out.println(disjoint.printList(result));
 		
 		System.out.println(disjoint.printList());
-		assertArrayEquals("test is not passed ",result.toArray(), list.toArray());
+		
+		//assertTrue(list.equals(result));
+		
+		assertEquals("test is not passed ",result, list);
 		
 	}
 
