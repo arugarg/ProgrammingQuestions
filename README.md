@@ -22,7 +22,8 @@ the output file for the above example input sequence.
 
 1.All the source code is in src   
 2.In src folder Run the Driver java class with 2 inputs one for input csv file the other for output text file  
-e.g. Driver ./input.csv ./output.txt  
+  e.g. Compiling : javac Driver.java  
+       Running   : Driver ./input.csv ./output.txt  
 3.Can run the test cases in test folder  
 
 ************************************************************************************
