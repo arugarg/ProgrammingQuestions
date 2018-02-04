@@ -26,4 +26,7 @@ the output file for the above example input sequence.
        Running   : Driver ./input.csv ./output.txt  
 3.Can run the test cases in test folder  
 
+or Alternativel can run directly via jar file  via command line
+  e.g. java -jar disjoint.jar "input.csv" "output.txt"
+
 ************************************************************************************
