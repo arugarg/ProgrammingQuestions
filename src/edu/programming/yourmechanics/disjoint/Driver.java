@@ -15,7 +15,6 @@ public class Driver {
 
 	public static void main(String[] args) throws Exception {
 
-		System.out.println(args.length);
 		if (args.length != 2) {
 			throw new IllegalArgumentException(
 					"Please provide two params one for input csv file and other for output text file");
@@ -30,8 +29,6 @@ public class Driver {
 		String splitBy = ",";
 
 		try {
-
-			System.out.println(outputFile);
 			File file = new File(outputFile);
 			/*
 			 * This logic will make sure that the file gets created if it is not present at
@@ -52,7 +49,7 @@ public class Driver {
 			while ((line = br.readLine()) != null) {
 
 				// use comma as separator
-				String[] input = line.split(splitBy);
+				String[] input = line.replace(" ","").split(splitBy);
 
 				String op = input[0];
 
