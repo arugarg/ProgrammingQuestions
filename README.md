@@ -23,8 +23,9 @@ the output file for the above example input sequence.
 1.All the source code is in src   
 2.In src folder Run the Driver java class with 2 inputs one for input csv file the other for output text file  
   e.g. Compiling : javac Driver.java  
-       Running   : Driver ./input.csv ./output.txt  
-3.Can run the test cases in test folder    
+       Running   : Driver ./InputFiles/input.csv ./OutputFiles/output.txt  
+3.Can run the test cases in test folder  
+4.For creating random input file you can generate it from GenerateInput class.  
 
 or Alternativel can run directly via jar file  via command line  
   e.g. java -jar disjoint.jar "input.csv" "output.txt"  
