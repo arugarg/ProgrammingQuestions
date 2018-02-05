@@ -51,7 +51,6 @@ public class DisjointSet {
 
 	/**
 	 * Adds the given interval and also performs the merged operation. 
-	 * Time Complexity : O(n) 
 	 * @param interval
 	 */
 	private void add(Interval interval) {
@@ -108,7 +107,6 @@ public class DisjointSet {
 
 	/**
 	 * Removes the given interval and
-	 * Time Complexity : O(n)
 	 * @param removal : interval to be removed
 	 */
 	private void remove(Interval removal) {
