@@ -80,11 +80,13 @@ public class GenerateInput {
 		return new String(low + "," + high);
 	}
 	
-	/** Run the main method if an random input file needs to be generated.
+	/* Run the main method if an random input file needs to be generated. */
+	/**
 	public static void main(String[] args) {
 		GenerateInput input = new GenerateInput();
-		input.generate(10 , "./outputFile.csv") ;
+		input.generate(10 , "./InputFiles/inputFile.csv") ;
 	}
 	**/
+	
 
 }

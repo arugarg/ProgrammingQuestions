@@ -56,13 +56,13 @@ public class Driver {
 				Integer high = Integer.parseInt(input[2]);
 
 				if(low > high) throw new IllegalArgumentException("not a valid interval");
-				// append to text output file
-				System.out.println(op + " " + low + " " + high);
+				
+				//System.out.println(op + " " + low + " " + high);
 
 				/* use the disjoint set method to take the input */
 				disjoint.union(op, low, high);
 
-				System.out.println(disjoint.printList());
+				//System.out.println(disjoint.printList());
 
 				/* write to the output file */
 				out.write(disjoint.printList() + "\n");
