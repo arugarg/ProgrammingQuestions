@@ -6,7 +6,6 @@ import java.util.ArrayList;
 /**
  * The driver program that reads add/remove instructions from csv input and
  * creates disjoint set and writes to the output file
- * 
  * @author Arushee Garg
  * @version 1.0
  */
@@ -52,10 +51,11 @@ public class Driver {
 				String[] input = line.replace(" ","").split(splitBy);
 
 				String op = input[0];
-
+				/*Assuming the intervals provided are valid i.e low <= high*/
 				Integer low = Integer.parseInt(input[1]);
 				Integer high = Integer.parseInt(input[2]);
 
+				if(low > high) throw new IllegalArgumentException("not a valid interval");
 				// append to text output file
 				System.out.println(op + " " + low + " " + high);
 

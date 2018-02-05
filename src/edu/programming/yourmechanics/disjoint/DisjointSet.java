@@ -36,22 +36,22 @@ public class DisjointSet {
 
 			if (list.get(mid).compareTo(interval) == -1) {
 				// reduce last
-
 				last = mid - 1;
 			} else if (list.get(mid).compareTo(interval) == 1) {
 				// increase initial and save
-				index = initial;
+				index = mid;
 				initial = mid + 1;
 			} else {
 				return mid;
 			}
 		}
+		
 		return index;
 	}
 
 	/**
-	 * Adds the given interval and also performs the merged operation. Time
-	 * Complexity : O(n)
+	 * Adds the given interval and also performs the merged operation. 
+	 * Time Complexity : O(n) 
 	 * @param interval
 	 */
 	private void add(Interval interval) {
@@ -61,9 +61,7 @@ public class DisjointSet {
 		 * index so that list remains sorted
 		 */
 		int index = findIndex(interval);
-		if (list.size() > 1)
-			index++;
-
+		if (list.size() > 1) index++;
 		
 		/*
 		 * if list is empty or all intervals in the list are smaller than start of the
@@ -77,8 +75,10 @@ public class DisjointSet {
 			list.add(0,interval);
 		}
 		/* else adding at the given index so the list is always remains sorted */
-		else
+		else {
 			list.add(index, interval);
+		}
+			
 
 		/* Create a new list merged for comparing and merging */
 		ArrayList<Interval> merged = new ArrayList<Interval>();
@@ -98,6 +98,7 @@ public class DisjointSet {
 			 */
 			else {
 				merged.get(last).end = Math.max(merged.get(last).end, item.end);
+				merged.get(last).start = Math.min(merged.get(last).start, item.start);
 			}
 		}
 
@@ -108,50 +109,78 @@ public class DisjointSet {
 	/**
 	 * Removes the given interval and
 	 * Time Complexity : O(n)
-	 * @param interval
+	 * @param removal : interval to be removed
 	 */
-	private void remove(Interval interval) {
+	private void remove(Interval removal) {
+		
+		
+		/* Cases : 4 test cases are possible
+		 * Case 1 : The remove interval doesn't have any overlap with the list
+		 * Case 2 : There is an overlap : with start lying within the interval (where end may or may not lie), 
+		 * 			the new end of that interval will be min of (removal.start or interval.end).
+		 * 			then check for clean up.
+		 * Case 3 : There is an overlap : with end lying within the interval 
+		 * 			the new start of that interval will be max of (removal.end or interval.start).
+		 * 			then check for clean up.
+		 * Case 4 : The remove interval lies entirely within a given interval in the list
+		 * 
+		 */
 
-		// if this interval doesn't have any overlap with the list do nothing.
-		if (list.size() == 0 || list.get(list.size() - 1).end < interval.start || interval.end <= list.get(0).start)
+		/* Case 1 : if this interval doesn't have any overlap with the list do nothing.*/
+		if (list.size() == 0 || list.get(list.size() - 1).end < removal.start || removal.end <= list.get(0).start)
 			return;
 
-		// findIndex after which this interval lies
-		int index = findIndex(interval);
+		// findIndex after which this remove interval lies
+		int index = findIndex(removal);
 
 		/* iterating only after this found index */
-		while (index < list.size() && interval.end > list.get(index).start) {
+		while (index < list.size() && removal.end > list.get(index).start) {
 
 			Integer end = list.get(index).end;
 			Integer start = list.get(index).start;
 
-			// if the remove interval is overlapping with this iterating interval */
-
-			if (start <= interval.start) {
-				list.get(index).end = Math.min(end, interval.start);
+			/* if the remove interval is overlapping with this iterating interval */
+			
+			/*Case 2 : There is an overlap : with start lying within the interval*/
+			if (start <= removal.start) {
+				list.get(index).end = Math.min(end, removal.start);
 			}
-
-			else if (end >= interval.end) {
-				list.get(index).start = Math.max(start, interval.end);
+			/* Case 3 : There is an overlap : with end lying within the interval */
+			else if (end >= removal.end) {
+				list.get(index).start = Math.max(start, removal.end);
 			}
-
+			
+			
+			/* cleaning up part 1 (interval becomes empty)
+			 * checking if the modified interval from the four cases leads to the removal of interval 
+			 * if the interval becomes empty. (cleaning up)
+			 */
 			if (list.get(index).end.equals(list.get(index).start) ){
-
 				list.remove(index);
 
-			} else
+			}
+			
+			/*Case 4 : checking if the iterating interval lies within the given interval, remove it 
+			 *else go further in the loop 
+			 */
+			if(list.get(index).end <= removal.end && list.get(index).start >= removal.start) {
+				list.remove(index);
+			}else
 				index++;
-
-			/*
+			
+			
+			/* cleaning up part 2 (interval gets split)
 			 * creating a new interval if the removed interval is contained within the
 			 * iterating interval so it splits the interval in two parts e.g [1,5] having
-			 * removal interval [2,3] splits into [1,2] and [3,5]
+			 * removal interval [2,3] splits into [1,2] and [3,5] and the new interval 
+			 * needs to be added at the next index.
 			 */
-			if (end > interval.end) {
-				Interval newInterval = new Interval(interval.end, end);
+			if (end > removal.end) {
+				Interval newInterval = new Interval(removal.end, end);
 				if (!list.contains(newInterval))
 					list.add(index, newInterval);
 			}
+			
 		}
 
 	}
